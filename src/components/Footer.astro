@@ -1,0 +1,58 @@
+---
+import { entities, footerLinks, site, venues } from '../data/site';
+import Logo from './Logo.astro';
+---
+
+<footer class="border-t border-white/10 bg-panel">
+  <div class="section-padding container-narrow">
+    <div class="mb-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <Logo variant="footer" />
+        <p class="mt-4 text-sm leading-relaxed text-muted">{site.description}</p>
+        <p class="mt-3 text-xs text-grey-muted">
+          Media of under-18s requires parental consent for website use. To request removal of any image or video,{' '}
+          <a href="/contact" class="text-accent hover:underline">contact us</a>.
+        </p>
+      </div>
+      <div>
+        <h2 class="mb-3 font-display text-sm tracking-widest text-accent">Three entities</h2>
+        <ul class="space-y-2 text-sm text-muted">
+          <li class="text-text">{entities.main.name}</li>
+          <li><a href={entities.cic.href} class="hover:text-accent">{entities.cic.name} ({entities.cic.type})</a></li>
+          <li><a href={entities.club.href} class="hover:text-accent">{entities.club.name}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="mb-3 font-display text-sm tracking-widest text-accent">Provision</h2>
+        <ul class="space-y-2 text-sm text-muted">
+          {footerLinks.provision.map((l) => (<li><a href={l.href} class="hover:text-accent">{l.label}</a></li>))}
+        </ul>
+        <h2 class="mb-3 mt-6 font-display text-sm tracking-widest text-accent">Club</h2>
+        <ul class="space-y-2 text-sm text-muted">
+          {footerLinks.club.map((l) => (<li><a href={l.href} class="hover:text-accent">{l.label}</a></li>))}
+        </ul>
+      </div>
+      <div>
+        <h2 class="mb-3 font-display text-sm tracking-widest text-accent">Venues</h2>
+        <ul class="space-y-2 text-sm text-muted">
+          {
+            venues.map((v) => (
+              <li>
+                <span class="text-text">{v.name}</span>
+                {v.areas.length > 0 && <span class="block text-xs">{v.areas.join(' · ')}</span>}
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-6 flex gap-3">
+          {site.facebookUrl && <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent" aria-label="Facebook">FB</a>}
+          {site.instagramUrl && <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent" aria-label="Instagram">IG</a>}
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-xs text-grey-muted md:flex-row">
+      <p>&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+      <p><a href="/privacy-policy" class="hover:text-accent">Privacy Policy</a> · Safeguarding-first coaching</p>
+    </div>
+  </div>
+</footer>

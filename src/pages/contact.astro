@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageShell from '../components/PageShell.astro';
+import { site, venueLine } from '../data/site';
+---
+
+<Layout title="Contact | Get Into Keeping & Football" description="Book a session or get in touch — UEFA-qualified coaching across the North West.">
+  <PageShell>
+    <section class="section-padding pt-32">
+      <div class="container-narrow">
+        <p class="eyebrow mb-3" data-reveal>Contact</p>
+        <h1 class="mb-4 font-display text-4xl font-bold md:text-5xl" data-reveal>{site.ctaPrimary}</h1>
+        <p class="mb-12 max-w-2xl text-lg text-muted" data-reveal>
+          Get in touch to book a session, ask about memberships, or find out more about programmes across {venueLine}.
+        </p>
+
+        <div class="grid gap-10 lg:grid-cols-2">
+          <form id="contact-form" class="rounded-xl border border-white/10 bg-panel p-6 md:p-8" data-reveal>
+            <div id="form-status" class="mb-4 hidden rounded-lg p-4 text-sm" role="status"></div>
+            <div class="mb-5">
+              <label for="name" class="mb-2 block text-sm font-semibold">Name</label>
+              <input type="text" id="name" name="name" required class="w-full rounded-lg border border-white/10 bg-panel2 px-4 py-3 text-text outline-none focus:border-accent" />
+            </div>
+            <div class="mb-5">
+              <label for="phone" class="mb-2 block text-sm font-semibold">Phone</label>
+              <input type="tel" id="phone" name="phone" required class="w-full rounded-lg border border-white/10 bg-panel2 px-4 py-3 text-text outline-none focus:border-accent" />
+            </div>
+            <div class="mb-5">
+              <label for="email" class="mb-2 block text-sm font-semibold">Email</label>
+              <input type="email" id="email" name="email" required class="w-full rounded-lg border border-white/10 bg-panel2 px-4 py-3 text-text outline-none focus:border-accent" />
+            </div>
+            <div class="mb-5">
+              <label for="message" class="mb-2 block text-sm font-semibold">Message</label>
+              <textarea id="message" name="message" rows="5" required class="w-full resize-y rounded-lg border border-white/10 bg-panel2 px-4 py-3 text-text outline-none focus:border-accent"></textarea>
+            </div>
+            <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+            <button type="submit" class="btn-primary">Send enquiry</button>
+          </form>
+
+          <div class="space-y-6" data-reveal>
+            <div class="rounded-xl border border-white/10 bg-panel2 p-8">
+              <h2 class="mb-4 font-display text-lg font-bold text-accent">Contact details</h2>
+              <dl class="space-y-3 text-sm text-muted">
+                {
+                  site.phone ? (
+                    <div><dt class="text-xs uppercase tracking-widest">Phone</dt><dd><a href={site.phoneHref} class="text-lg font-semibold text-text hover:text-accent">{site.phone}</a></dd></div>
+                  ) : (
+                    <p class="text-xs text-grey-muted">TODO: Add phone in site.ts</p>
+                  )
+                }
+                {
+                  site.email ? (
+                    <div><dt class="text-xs uppercase tracking-widest">Email</dt><dd><a href={site.emailHref} class="hover:text-accent">{site.email}</a></dd></div>
+                  ) : (
+                    <p class="text-xs text-grey-muted">TODO: Add email in site.ts</p>
+                  )
+                }
+                <div><dt class="text-xs uppercase tracking-widest">Venues</dt><dd class="text-text/85">{venueLine}</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </PageShell>
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  // TODO: Replace with your Web3Forms access key in .env as PUBLIC_WEB3FORMS_KEY
+  const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    if (!accessKey) {
+      status.className = 'mb-4 rounded-lg border border-white/20 bg-panel2 p-4 text-sm text-muted';
+      status.textContent = 'Contact form not configured yet. TODO: Add PUBLIC_WEB3FORMS_KEY to .env';
+      status.classList.remove('hidden');
+      return;
+    }
+
+    const formData = new FormData(form);
+    formData.append('access_key', accessKey);
+    formData.append('subject', 'New enquiry — Get Into Keeping & Football');
+
+    status.className = 'mb-4 rounded-lg bg-panel2 p-4 text-sm text-text';
+    status.textContent = 'Sending…';
+    status.classList.remove('hidden');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+      const data = (await res.json()) as { success?: boolean };
+      if (data.success) {
+        status.textContent = 'Thank you — your message has been sent.';
+        form.reset();
+      } else throw new Error('Failed');
+    } catch {
+      status.textContent = 'Something went wrong. Please try again.';
+    }
+  });
+</script>

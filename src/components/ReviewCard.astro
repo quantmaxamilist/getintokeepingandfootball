@@ -1,0 +1,23 @@
+---
+import type { Review } from '../data/reviews';
+
+interface Props {
+  review: Review;
+}
+
+const { review } = Astro.props;
+---
+
+<blockquote class="rounded-xl border border-white/10 bg-panel p-6" data-reveal>
+  {review.source === 'Placeholder' && (
+    <p class="mb-2 text-[10px] font-semibold uppercase tracking-widest text-grey-muted">Placeholder review</p>
+  )}
+  <div class="mb-3 text-accent" aria-label={`${review.rating} out of 5 stars`}>
+    {'★'.repeat(review.rating)}
+  </div>
+  <p class="mb-4 text-sm leading-relaxed text-text/90">"{review.quote}"</p>
+  <footer class="text-sm font-semibold text-muted">
+    {review.author}
+    {review.programme && <span class="block text-xs font-normal text-grey-muted">{review.programme}</span>}
+  </footer>
+</blockquote>

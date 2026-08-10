@@ -1,0 +1,38 @@
+---
+import { utilityLinks } from '../data/site';
+import Icon from './Icon.astro';
+---
+
+<div id="utility-bar" class="sticky top-0 z-[60] border-b border-white/10 bg-panel">
+  <div class="overflow-x-auto scrollbar-none">
+    <ul class="mx-auto flex min-w-max items-center gap-3 px-4 py-2 md:justify-center md:gap-4 md:px-8">
+      {
+        utilityLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="group flex w-[4.5rem] shrink-0 flex-col items-center gap-1.5 text-center md:w-20"
+            >
+              <span class="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-panel2 transition-colors group-hover:border-accent group-hover:bg-white/5">
+                <Icon name={link.icon} class="h-5 w-5 text-accent" />
+              </span>
+              <span class="text-[10px] font-semibold uppercase leading-tight tracking-wide text-muted group-hover:text-accent">
+                {link.label}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<style>
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+</style>

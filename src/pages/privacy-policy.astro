@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageShell from '../components/PageShell.astro';
+import { site } from '../data/site';
+---
+
+<Layout title="Privacy Policy | Get Into Keeping & Football" description="Privacy policy for Get Into Keeping & Football, Get Into Sport CIC and Red Rose FC.">
+  <PageShell>
+    <section class="section-padding pt-32">
+      <div class="container-narrow max-w-3xl">
+        <h1 class="mb-8 font-display text-4xl font-bold">Privacy Policy</h1>
+        <div class="space-y-4 text-muted">
+          <p>{site.name} respects your privacy. This policy explains how we collect and use personal information.</p>
+          <h2 class="font-display text-xl font-bold text-text">Information we collect</h2>
+          <p>When you submit our contact form, we collect your name, phone, email and message to respond to your enquiry.</p>
+          <h2 class="font-display text-xl font-bold text-text">Safeguarding &amp; media</h2>
+          <p>
+            We never publish a child's full name alongside their image or video, and we do not include identifying details such as school, exact address, or age combined with full name.
+          </p>
+          <p>
+            Media featuring under-18s requires parental consent covering website use — the client is responsible for obtaining and maintaining this consent.
+          </p>
+          <p>
+            To request removal of any image or video, please <a href="/contact" class="text-accent hover:underline">contact us</a>.
+          </p>
+          <h2 class="font-display text-xl font-bold text-text">Contact form processing</h2>
+          <p>Form submissions are processed via Web3Forms.</p>
+          <h2 class="font-display text-xl font-bold text-text">Contact</h2>
+          <p>For privacy questions, use our <a href="/contact" class="text-accent hover:underline">contact form</a>.</p>
+        </div>
+      </div>
+    </section>
+  </PageShell>
+</Layout>

@@ -1,0 +1,143 @@
+---
+import { navLinks, site } from '../data/site';
+import Logo from './Logo.astro';
+
+const provisionLink = navLinks.find((l) => l.children);
+const topLinks = navLinks.filter((l) => !l.children);
+---
+
+<header
+  id="site-header"
+  class="sticky top-[var(--utility-offset,3.75rem)] z-50 border-b border-white/10 bg-base/95 backdrop-blur-md transition-shadow [&.scrolled]:shadow-lg"
+>
+  <div class="container-narrow flex items-center justify-between gap-4 px-5 py-3 md:px-8 lg:px-12">
+    <a href="/" class="shrink-0 transition-opacity hover:opacity-90" aria-label={`${site.name} — Home`}>
+      <Logo variant="nav" />
+    </a>
+
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Main navigation">
+      {
+        navLinks.map((link) =>
+          link.children ? (
+            <div class="relative">
+              <button
+                id="provision-dropdown-trigger"
+                class="flex min-h-10 items-center gap-1 text-sm font-semibold text-text/85 transition-colors hover:text-accent"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                {link.label}
+                <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                </svg>
+              </button>
+              <div
+                id="provision-dropdown"
+                class="invisible absolute left-0 top-full z-50 mt-2 min-w-[240px] translate-y-2 rounded-xl border border-white/10 bg-panel p-2 opacity-0 shadow-xl transition-all [&.open]:visible [&.open]:translate-y-0 [&.open]:opacity-100"
+              >
+                {
+                  link.children.map((child) => (
+                    <a href={child.href} class="block rounded-lg px-3 py-2 text-sm text-text/85 hover:bg-white/5 hover:text-accent">
+                      {child.label}
+                    </a>
+                  ))
+                }
+              </div>
+            </div>
+          ) : (
+            <a href={link.href} class="min-h-10 text-sm font-semibold text-text/85 transition-colors hover:text-accent">
+              {link.label}
+            </a>
+          ),
+        )
+      }
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="/contact" class="btn-primary hidden text-sm sm:inline-flex">{site.ctaPrimary}</a>
+      <button
+        type="button"
+        id="nav-toggle"
+        class="nav-toggle relative z-[70] flex h-10 w-10 items-center justify-center rounded-full border border-white/20 lg:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="nav-toggle__bar bg-text"></span>
+        <span class="nav-toggle__bar bg-text"></span>
+        <span class="nav-toggle__bar bg-text"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="mobile-menu" class="mobile-menu fixed inset-0 z-[100] lg:hidden" aria-hidden="true" inert>
+  <button type="button" id="mobile-menu-backdrop" class="mobile-menu__backdrop absolute inset-0 bg-base/80" aria-label="Close menu" tabindex="-1"></button>
+  <div id="mobile-menu-panel" class="mobile-menu__panel absolute inset-x-0 top-0 flex max-h-full flex-col bg-panel shadow-2xl" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="flex items-center justify-between border-b border-white/10 px-5 py-4">
+      <span class="font-display text-sm tracking-widest text-accent">Menu</span>
+      <button type="button" id="mobile-menu-close" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-text" aria-label="Close menu">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="flex-1 overflow-y-auto px-5 py-4">
+      <ul class="flex flex-col gap-1">
+        {
+          topLinks.map((link) => (
+            <li><a href={link.href} class="flex min-h-11 items-center rounded-lg px-3 text-lg font-semibold text-text hover:bg-white/5 hover:text-accent" data-mobile-nav-link>{link.label}</a></li>
+          ))
+        }
+        {
+          provisionLink?.children && (
+            <li id="mobile-provision-accordion" class="mobile-accordion">
+              <button type="button" id="mobile-provision-toggle" class="flex min-h-11 w-full items-center justify-between rounded-lg px-3 text-lg font-semibold text-text" aria-expanded="false" aria-controls="mobile-provision-list">
+                {provisionLink.label}
+                <svg class="h-5 w-5 text-accent transition-transform mobile-accordion__chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+              </button>
+              <div id="mobile-provision-list" hidden>
+                <ul class="pb-2 pl-2">
+                  {provisionLink.children.map((child) => (
+                    <li><a href={child.href} class="flex min-h-10 items-center rounded-lg px-3 text-base text-muted hover:text-accent" data-mobile-nav-link>{child.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          )
+        }
+      </ul>
+      <div class="mt-6 space-y-3 border-t border-white/10 pt-6">
+        <a href="/contact" class="btn-primary flex w-full justify-center" data-mobile-nav-link>{site.ctaPrimary}</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<script>
+  const utility = document.getElementById('utility-bar');
+  const header = document.getElementById('site-header');
+  const syncOffset = () => {
+    const h = utility?.offsetHeight ?? 0;
+    document.documentElement.style.setProperty('--utility-offset', `${h}px`);
+    header?.style.setProperty('top', `${h}px`);
+  };
+  syncOffset();
+  window.addEventListener('resize', syncOffset, { passive: true });
+</script>
+
+<style>
+  .nav-toggle__bar { position: absolute; left: 50%; width: 1.25rem; height: 2px; border-radius: 9999px; transform: translateX(-50%); transition: transform .3s, opacity .3s, top .3s; }
+  .nav-toggle__bar:nth-child(1) { top: calc(50% - 6px); }
+  .nav-toggle__bar:nth-child(2) { top: 50%; transform: translate(-50%, -50%); }
+  .nav-toggle__bar:nth-child(3) { top: calc(50% + 6px); }
+  .nav-toggle.is-open .nav-toggle__bar:nth-child(1) { top: 50%; transform: translate(-50%, -50%) rotate(45deg); }
+  .nav-toggle.is-open .nav-toggle__bar:nth-child(2) { opacity: 0; }
+  .nav-toggle.is-open .nav-toggle__bar:nth-child(3) { top: 50%; transform: translate(-50%, -50%) rotate(-45deg); }
+  .mobile-menu { visibility: hidden; pointer-events: none; }
+  .mobile-menu__backdrop { opacity: 0; transition: opacity .3s; }
+  .mobile-menu__panel { opacity: 0; transform: translateY(-12px); transition: opacity .3s, transform .3s; padding-top: var(--mobile-header-offset, 7rem); max-height: 100dvh; }
+  .mobile-menu.is-open { visibility: visible; pointer-events: auto; }
+  .mobile-menu.is-open .mobile-menu__backdrop { opacity: 1; }
+  .mobile-menu.is-open .mobile-menu__panel { opacity: 1; transform: translateY(0); }
+  .mobile-accordion.is-open .mobile-accordion__chevron { transform: rotate(180deg); }
+  .mobile-accordion.is-open #mobile-provision-list[hidden] { display: block; }
+</style>

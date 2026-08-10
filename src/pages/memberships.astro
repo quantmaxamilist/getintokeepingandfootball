@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageShell from '../components/PageShell.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { pricingTiers, pricingDisclaimer } from '../data/pricing';
+---
+
+<Layout title="Memberships & Pricing | Get Into Keeping & Football" description="Membership plans for Get Into Keeping & Football — example pricing, book when live.">
+  <PageShell>
+    <section class="section-padding pt-32">
+      <div class="container-narrow">
+        <p class="eyebrow mb-3" data-reveal>Memberships</p>
+        <h1 class="mb-4 font-display text-4xl font-bold md:text-5xl" data-reveal>Pricing plans</h1>
+        <p class="mb-4 max-w-2xl text-lg text-muted" data-reveal>Choose the plan that fits your player's journey.</p>
+        <p class="mb-12 text-sm text-grey-muted" data-reveal>{pricingDisclaimer}</p>
+
+        {/* TODO: wire Stripe Checkout */}
+        <div class="grid gap-8 md:grid-cols-3">
+          {
+            pricingTiers.map((tier) => (
+              <div class:list={['relative flex flex-col rounded-xl border bg-panel p-8', tier.popular ? 'border-accent' : 'border-white/10']} data-reveal>
+                {tier.popular && <span class="absolute -top-3 left-6 rounded-full bg-accent px-3 py-0.5 text-xs font-bold text-base">Most popular</span>}
+                <h2 class="font-display text-2xl font-bold">{tier.name}</h2>
+                <p class="mt-2 font-display text-4xl text-accent">{tier.price}</p>
+                <p class="text-sm text-muted">{tier.period}</p>
+                <p class="mt-4 text-sm text-muted">{tier.description}</p>
+                <ul class="my-6 flex-1 space-y-2 text-sm text-text/85">
+                  {tier.features.map((f) => (<li class="flex gap-2"><span class="text-accent">✓</span>{f}</li>))}
+                </ul>
+                <button type="button" class="btn-primary w-full opacity-80" disabled title="Placeholder — Stripe not wired yet">{tier.cta}</button>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <CtaBand />
+  </PageShell>
+</Layout>

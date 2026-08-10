@@ -1,0 +1,144 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Blackout + Pitch — monochrome default; swap --color-accent for one-line re-skin */
+  --color-base: #0a0b0d;
+  --color-panel: #121418;
+  --color-panel2: #171a1f;
+  --color-text: #f3f5f6;
+  --color-muted: #9aa1a8;
+  --color-hairline: rgba(255, 255, 255, 0.1);
+  --color-accent: #ffffff;
+  --color-grey-light: #c7ced2;
+  --color-grey-muted: #6b7178;
+  --color-white: #ffffff;
+
+  /* Optional re-skin accents (uncomment in @theme to activate):
+  --color-accent: #2ee56e;  green
+  --color-accent: #e93b45;  red
+  --color-accent: #3aa0ff;  blue
+  --color-rose: #e02532;    Red Rose FC optional accent */
+
+  --font-display: 'Oswald', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-base font-body text-text antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display uppercase tracking-wide text-text;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.28em] text-accent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-base transition-colors hover:bg-grey-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full border border-hairline px-6 py-3 text-sm font-semibold text-text transition-colors hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-text transition-colors hover:border-accent hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .section-padding {
+    @apply px-5 py-16 md:px-8 md:py-24 lg:px-12;
+  }
+
+  .container-narrow {
+    @apply mx-auto max-w-6xl;
+  }
+
+  .hairline-border {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+.js-ready [data-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .js-ready [data-reveal]:not(.is-revealed) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: #f3f5f6;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 40s linear infinite;
+}
+
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+@keyframes stadium-light {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.stadium-light {
+  animation: stadium-light 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stadium-light {
+    animation: none;
+    opacity: 0.4;
+  }
+}

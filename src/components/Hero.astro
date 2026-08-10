@@ -1,0 +1,56 @@
+---
+import { site, venueLine } from '../data/site';
+import Logo from './Logo.astro';
+
+interface Props {
+  videoSrc?: string;
+}
+
+const { videoSrc = '' } = Astro.props;
+---
+
+<section class="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-base">
+  {
+    videoSrc ? (
+      <>
+        {/* Media of under-18s requires parental consent covering website use — client is responsible. */}
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          controlsList="nodownload"
+          disablePictureInPicture
+          class="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-base/70"></div>
+      </>
+    ) : (
+      <>
+        <div class="absolute inset-0 bg-gradient-to-b from-panel via-base to-base"></div>
+        <div class="stadium-light absolute -left-1/4 top-0 h-[120%] w-1/2 rotate-12 bg-gradient-to-r from-white/10 to-transparent blur-3xl"></div>
+        <div class="stadium-light absolute -right-1/4 top-1/4 h-full w-1/2 -rotate-12 bg-gradient-to-l from-white/8 to-transparent blur-3xl" style="animation-delay: 2s"></div>
+        <div class="absolute inset-0 bg-base/50"></div>
+      </>
+    )
+  }
+
+  <div class="relative z-10 mx-auto max-w-4xl px-5 py-32 text-center">
+    <div class="mb-8 flex justify-center" data-reveal>
+      <Logo variant="hero" />
+    </div>
+    <p class="eyebrow mb-4" data-reveal>UEFA-QUALIFIED · NORTH WEST ENGLAND</p>
+    <h1 class="mb-6 font-display text-4xl font-bold leading-tight md:text-6xl lg:text-7xl" data-reveal>
+      Get into keeping.<br /><span class="text-accent">Get into football.</span>
+    </h1>
+    <p class="mx-auto mb-10 max-w-2xl text-lg text-muted" data-reveal>
+      UEFA-qualified coaching across {venueLine} — tots, groups, camps, 1:1 and academy pathways.
+    </p>
+    <div class="flex flex-col items-center justify-center gap-4 sm:flex-row" data-reveal>
+      <a href="/contact" class="btn-primary">{site.ctaPrimary}</a>
+      <a href="/memberships" class="btn-ghost-light">{site.ctaSecondary}</a>
+    </div>
+  </div>
+</section>

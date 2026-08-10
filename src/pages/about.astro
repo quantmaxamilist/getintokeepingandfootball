@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageShell from '../components/PageShell.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { entities, site, venues } from '../data/site';
+---
+
+<Layout title="About | Get Into Keeping & Football" description="UEFA-qualified goalkeeper and football coaching across North West England — Get Into Sport CIC and Red Rose FC.">
+  <PageShell>
+    <section class="section-padding pt-32">
+      <div class="container-narrow max-w-3xl">
+        <p class="eyebrow mb-3" data-reveal>About</p>
+        <h1 class="mb-6 font-display text-4xl font-bold md:text-5xl" data-reveal>{site.name}</h1>
+        <div class="space-y-4 text-muted" data-reveal>
+          <p>{site.description}</p>
+          <p>
+            We deliver UEFA-qualified goalkeeper and football coaching across {site.areaServed} — with sessions in{' '}
+            {venues.map((v) => v.name).join(', ')} and surrounding areas.
+          </p>
+          <p>
+            Our work sits alongside {entities.cic.name} ({entities.cic.type}) and {entities.club.name}, reinvesting in grassroots sport and developing players at every level.
+          </p>
+        </div>
+      </div>
+    </section>
+    <CtaBand />
+  </PageShell>
+</Layout>

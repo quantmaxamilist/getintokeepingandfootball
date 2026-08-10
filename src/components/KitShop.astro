@@ -1,0 +1,24 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<section class:list={['section-padding', compact && 'py-12']}>
+  <div class="container-narrow">
+    {
+      !compact && (
+        <>
+          <p class="eyebrow mb-3" data-reveal>Kit Shop</p>
+          <h2 class="mb-6 font-display text-3xl font-bold md:text-4xl" data-reveal>Club kit &amp; merchandise</h2>
+        </>
+      )
+    }
+    <div class="rounded-xl border border-dashed border-white/20 bg-panel2 p-10 text-center" data-reveal>
+      <p class="font-display text-xl tracking-wide text-accent">Coming soon</p>
+      <p class="mt-2 text-sm text-muted">TODO: Real shop embed will replace this placeholder.</p>
+    </div>
+  </div>
+</section>

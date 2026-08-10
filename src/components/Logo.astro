@@ -1,0 +1,29 @@
+---
+interface Props {
+  variant?: 'nav' | 'hero' | 'footer';
+  class?: string;
+}
+
+const { variant = 'nav', class: className = '' } = Astro.props;
+
+const sizes = {
+  nav: 'h-10 md:h-11 w-auto',
+  hero: 'h-20 md:h-28 w-auto',
+  footer: 'h-8 w-auto opacity-90',
+};
+
+// TODO: Replace with client-supplied public/logo.png (transparent PNG)
+const logoPng = '/logo.png';
+const logoFallback = '/logo.svg';
+---
+
+<picture>
+  <source srcset={logoPng} type="image/png" />
+  <img
+    src={logoFallback}
+    alt="Get Into Keeping & Football"
+    class:list={[sizes[variant], 'object-contain', className]}
+    loading="eager"
+    decoding="async"
+  />
+</picture>

@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageShell from '../../components/PageShell.astro';
+import ProgrammeCard from '../../components/ProgrammeCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { programmes } from '../../data/programmes';
+---
+
+<Layout title="Provision | Get Into Keeping & Football" description="UEFA-qualified goalkeeper and football programmes — tots, groups, camps, 1:1 and advanced coaching across the North West.">
+  <PageShell>
+    <section class="section-padding pt-32">
+      <div class="container-narrow">
+        <p class="eyebrow mb-3" data-reveal>Provision</p>
+        <h1 class="mb-4 font-display text-4xl font-bold md:text-5xl" data-reveal>Our programmes</h1>
+        <p class="mb-12 max-w-2xl text-lg text-muted" data-reveal>
+          Seven coaching programmes covering every stage — from tots and early years through to advanced players and safeguarding standards.
+        </p>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {programmes.map((p) => <ProgrammeCard programme={p} />)}
+        </div>
+      </div>
+    </section>
+    <CtaBand />
+  </PageShell>
+</Layout>

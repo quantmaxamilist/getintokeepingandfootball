@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageShell from '../components/PageShell.astro';
+import Hero from '../components/Hero.astro';
+import AffiliationsMarquee from '../components/AffiliationsMarquee.astro';
+import ProgrammeCard from '../components/ProgrammeCard.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import SocialFeed from '../components/SocialFeed.astro';
+import KitShop from '../components/KitShop.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { trustPillars } from '../data/site';
+import { programmes } from '../data/programmes';
+import { pricingTiers, pricingDisclaimer } from '../data/pricing';
+import { homePreviewReviews, reviewStats } from '../data/reviews';
+import { entities } from '../data/site';
+---
+
+<Layout>
+  <PageShell>
+    <Hero />
+    <AffiliationsMarquee />
+
+    <section class="section-padding">
+      <div class="container-narrow">
+        <div class="grid gap-6 md:grid-cols-3">
+          {trustPillars.map((p) => (
+            <div class="rounded-xl border border-white/10 bg-panel p-6" data-reveal>
+              <h2 class="mb-3 font-display text-xl font-bold">{p.title}</h2>
+              <p class="text-sm text-muted">{p.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding bg-panel">
+      <div class="container-narrow">
+        <p class="eyebrow mb-3" data-reveal>Programmes</p>
+        <h2 class="mb-10 font-display text-3xl font-bold md:text-4xl" data-reveal>What we offer</h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {programmes.map((p) => <ProgrammeCard programme={p} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding">
+      <div class="container-narrow">
+        <div class="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <p class="eyebrow mb-3" data-reveal>Memberships</p>
+            <h2 class="font-display text-3xl font-bold md:text-4xl" data-reveal>Find your plan</h2>
+          </div>
+          <a href="/memberships" class="text-sm font-semibold text-accent hover:underline" data-reveal>See all plans →</a>
+        </div>
+        <p class="mb-6 text-xs text-grey-muted" data-reveal>{pricingDisclaimer}</p>
+        <div class="grid gap-6 md:grid-cols-3">
+          {
+            pricingTiers.map((tier) => (
+              <div class:list={['relative rounded-xl border bg-panel p-6', tier.popular ? 'border-accent' : 'border-white/10']} data-reveal>
+                {tier.popular && <span class="absolute -top-3 left-6 rounded-full bg-accent px-3 py-0.5 text-xs font-bold text-base">Most popular</span>}
+                <h3 class="font-display text-xl font-bold">{tier.name}</h3>
+                <p class="mt-2 font-display text-3xl text-accent">{tier.price}</p>
+                <p class="text-xs text-muted">{tier.period}</p>
+                <p class="mt-4 text-sm text-muted">{tier.description}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding bg-panel2">
+      <div class="container-narrow">
+        <p class="eyebrow mb-3" data-reveal>Community</p>
+        <h2 class="mb-6 font-display text-3xl font-bold md:text-4xl" data-reveal>More than coaching</h2>
+        <p class="mb-8 max-w-2xl text-muted" data-reveal>
+          Get Into Keeping & Football sits alongside Get Into Sport CIC and Red Rose FC — reinvesting in grassroots sport across the North West.
+        </p>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl border border-white/10 bg-panel p-6" data-reveal>
+            <h3 class="font-display text-lg font-bold">{entities.cic.name}</h3>
+            <p class="mt-1 text-xs uppercase tracking-widest text-muted">{entities.cic.type}</p>
+            <p class="mt-3 text-sm text-muted">{entities.cic.description}</p>
+            <a href={entities.cic.href} class="mt-4 inline-block text-sm font-semibold text-accent">Learn more →</a>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-panel p-6" data-reveal>
+            <h3 class="font-display text-lg font-bold">{entities.club.name}</h3>
+            <p class="mt-3 text-sm text-muted">{entities.club.description}</p>
+            {/* optional rose accent: #e02532 */}
+            <a href={entities.club.href} class="mt-4 inline-block text-sm font-semibold text-accent">Learn more →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding">
+      <div class="container-narrow">
+        <div class="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <p class="eyebrow mb-3" data-reveal>Reviews</p>
+            <h2 class="font-display text-3xl font-bold md:text-4xl" data-reveal>
+              {reviewStats.total} {reviewStats.label}
+            </h2>
+          </div>
+          <a href="/reviews" class="text-sm font-semibold text-accent hover:underline" data-reveal>All reviews →</a>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          {homePreviewReviews.map((r) => <ReviewCard review={r} />)}
+        </div>
+      </div>
+    </section>
+
+    <SocialFeed />
+    <KitShop compact />
+    <CtaBand />
+  </PageShell>
+</Layout>
