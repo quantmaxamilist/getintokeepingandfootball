@@ -7,15 +7,44 @@ interface Props {
 }
 
 const { programme } = Astro.props;
+
+// Dimmed session photo behind each card. object-cover + overflow-hidden keeps it clipped inside the card.
+const imageMap: Record<string, string> = {
+  'tots-development': '/photos/tots.jpg',
+  'small-group-sessions': '/photos/small-group.jpg',
+  'early-years-development': '/photos/early-years.jpg',
+  'holiday-camps': '/photos/holiday-camps.jpg',
+  'one-to-one-sessions': '/photos/one-to-one.jpg',
+  'advanced-player': '/photos/advanced.jpg',
+  'safeguarding': '/photos/safeguarding.jpg',
+};
+const bg = imageMap[programme.slug];
 ---
 
 <a
   href={`/provision/${programme.slug}`}
-  class="group flex flex-col rounded-xl border border-white/10 bg-panel p-6 transition-all hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg"
+  class="group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-panel p-6 transition-all hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg"
   data-reveal
 >
-  <Icon name={programme.icon} class="mb-4 h-10 w-10 text-accent" />
-  <h3 class="mb-2 font-display text-xl font-bold">{programme.title}</h3>
-  <p class="mb-4 flex-1 text-sm text-muted">{programme.summary}</p>
-  <span class="text-sm font-semibold text-accent group-hover:underline">Learn more →</span>
+  {
+    bg && (
+      <>
+        <img
+          src={bg}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0 bg-base/80 transition-colors group-hover:bg-base/75" />
+      </>
+    )
+  }
+  <div class="relative z-10 flex flex-1 flex-col">
+    <Icon name={programme.icon} class="mb-4 h-10 w-10 text-accent" />
+    <h3 class="mb-2 font-display text-xl font-bold">{programme.title}</h3>
+    <p class="mb-4 flex-1 text-sm text-text/80">{programme.summary}</p>
+    <span class="text-sm font-semibold text-accent group-hover:underline">Learn more →</span>
+  </div>
 </a>

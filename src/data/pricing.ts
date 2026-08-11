@@ -9,56 +9,39 @@ export interface PricingTier {
   cta: string;
 }
 
-// TODO: Replace example prices with live pricing when confirmed by client
+// Live memberships (currently sold via the club's Wix plans page).
 export const pricingTiers: PricingTier[] = [
   {
-    id: 'starter',
-    name: 'Starter',
-    price: '£29',
-    period: 'per month (example)',
-    description: 'An entry point for players starting their coaching journey.',
+    id: 'early-years-development',
+    name: 'Early Years Development',
+    price: '£20',
+    period: 'every month',
+    description: 'Saturday morning football development centre.',
     features: [
-      'One group session per week',
-      'Access to holiday camp booking',
-      'Progress updates from coaches',
-      'North West venue access',
-    ],
-    cta: 'Choose Starter',
-  },
-  {
-    id: 'development',
-    name: 'Development',
-    price: '£49',
-    period: 'per month (example)',
-    description: 'Our most popular plan — more sessions, more progress.',
-    features: [
-      'Two group sessions per week',
-      'Priority holiday camp places',
-      'Quarterly progress review',
-      'Pathway into advanced programmes',
-      'Member kit discount (when live)',
+      'Water Primary School',
+      'Ramsbottom Swimming Centre',
+      'Valid until cancelled',
     ],
     popular: true,
-    cta: 'Choose Development',
+    cta: 'Select',
   },
   {
-    id: 'elite',
-    name: 'Elite 1:1',
-    price: '£89',
-    period: 'per month (example)',
-    description: 'Personalised UEFA-qualified coaching alongside group access.',
+    id: 'tots-development-centre',
+    name: 'Tots Development Centre',
+    price: '£20',
+    period: 'every month',
+    description: "18–36 months membership at St Veronica's Primary School, Helmshore.",
     features: [
-      'One 1:1 session per month',
-      'Unlimited group session access',
-      'Academy pathway guidance',
-      'Direct coach communication',
-      'Flexible scheduling where available',
+      'Ages 18–36 months',
+      "St Veronica's Primary School, Helmshore",
+      'Valid until cancelled',
     ],
-    cta: 'Choose Elite 1:1',
+    popular: true,
+    cta: 'Select',
   },
 ];
 
-export const pricingDisclaimer =
-  'Example pricing only — not live pricing. Final membership costs will be confirmed before launch.';
+// Interim: memberships are purchased on the existing Wix plans page until Stripe is wired on the new site.
+export const purchaseUrl = 'https://www.getintokeepingandfootball.co.uk/plans-pricing';
 
-// TODO: wire Stripe Checkout
+export const pricingDisclaimer = 'Memberships are billed monthly and valid until cancelled.';

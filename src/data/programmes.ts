@@ -24,7 +24,16 @@ export const programmes: Programme[] = [
     icon: 'tot',
     summary: 'Fun, age-appropriate sessions introducing movement, coordination and a love of the ball.',
     intro:
-      'Our tots programme builds confidence through play — helping the youngest players develop fundamental movement skills in a safe, supportive environment.',
+      "Our Early Years Tots Development Centre is the perfect starting point for your child's football journey. Our interactive, engaging sessions focus on developing your child's gross and fine motor skills, giving them a strong foundation to progress into our further development programmes.",
+    paragraphs: [
+      'Kick off your football journey today — book a free taster session and take the first step towards mastering the beautiful game.',
+    ],
+    features: [
+      { label: 'Developing', title: 'Fundamental Movements', body: 'These movements help develop coordination, balance and muscle strength as toddlers gain more mobility and independence.' },
+      { label: 'Enhancing', title: 'Social Engagement', body: 'At this stage, toddlers start to explore interactions with others — learning important social skills like empathy, cooperation and communication.' },
+      { label: 'Recognising', title: 'Colours, Numbers & Words', body: 'Recognising colours, numbers and words is an important part of early cognitive development.' },
+      { label: 'Introducing', title: 'The Beautiful Game', body: "The perfect building block for your child's first love of football." },
+    ],
     included: [
       'Age-appropriate games and activities',
       'Fundamental movement and coordination',
@@ -69,7 +78,13 @@ export const programmes: Programme[] = [
     icon: 'camp',
     summary: 'High-energy holiday camps combining football, keeping skills and full-day activity.',
     intro:
-      'Holiday camps pack coaching, games and fun into action-filled days — ideal for keeping active during school breaks across our North West venues.',
+      'Get Into Keeping and Football have teamed up with The Valley Leadership Academy to create the biggest and best sports camp provision. We offer Football Only, Multi-Sport and Creative Theatre — catering for the different interests your young people have.',
+    features: [
+      { label: 'Unforgettable', title: 'Experiences', body: "Making memories, creating new friendships and winning daily competitions gives your child a memorable experience they won't forget." },
+      { label: 'High Level', title: 'Facilities', body: 'Warm, safe and equipped with the best facilities in the area, allowing for high-level engagement throughout the full week.' },
+      { label: 'Daily', title: 'Competitions', body: 'Prizes can be won every day, creating excitement, competition and teamwork.' },
+      { label: 'Finals Day', title: 'Friday Finals', body: "Our camps are well known for 'Friday Finals Day'. Dramatic twists and turns throughout the day create a competition with an outstanding reputation." },
+    ],
     included: [
       'Full or half-day camp options',
       'Football and goalkeeper activities',
@@ -84,7 +99,16 @@ export const programmes: Programme[] = [
     icon: 'whistle',
     summary: 'Personalised UEFA-qualified coaching tailored to individual goals — keeping or outfield.',
     intro:
-      'One-to-one sessions focus entirely on the individual — whether developing as a goalkeeper or an outfield player, with coaching tailored to their goals.',
+      "Our 1-2-1 coaching programme is designed to enhance your child's football development, offering tailored sessions to meet their individual needs. In collaboration with professional footballer Jamie Stott, we provide expert coaching so your child receives the highest quality training and guidance — helping them reach their full potential on and off the pitch.",
+    paragraphs: [
+      'We have our own exclusive floodlit 3G facility to ensure high-quality training all year round.',
+    ],
+    features: [
+      { label: 'Tailored', title: 'Session Plans', body: 'Each session is planned around the attributes your player needs to improve. Using SMART goals and objectives, we have a proven track record of developing players through this specialised method.' },
+      { label: 'High Intensity', title: 'High-Tempo Sessions', body: 'High-tempo sessions build muscle memory, fast decision-making and overall fitness. Working from training pace to match pace allows an easy transfer into competitive fixtures.' },
+      { label: 'Weekly', title: 'Feedback', body: 'Detailed feedback is provided throughout each session, along with a direct line of communication to your UEFA-qualified coach, who will analyse any footage and evidence you collect.' },
+      { label: 'Proven', title: 'Track Record', body: 'A number of our players receive invitations to prestigious ETCs, RTCs and Academy trials. We keep working with these players multiple times per week, supporting their development throughout the journey.' },
+    ],
     included: [
       'UEFA-qualified personal coaching',
       'Goalkeeper or outfield focus',

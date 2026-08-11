@@ -57,11 +57,11 @@ import { entities } from '../data/site';
           <a href="/memberships" class="text-sm font-semibold text-accent hover:underline" data-reveal>See all plans →</a>
         </div>
         <p class="mb-6 text-xs text-grey-muted" data-reveal>{pricingDisclaimer}</p>
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
           {
             pricingTiers.map((tier) => (
               <div class:list={['relative rounded-xl border bg-panel p-6', tier.popular ? 'border-accent' : 'border-white/10']} data-reveal>
-                {tier.popular && <span class="absolute -top-3 left-6 rounded-full bg-accent px-3 py-0.5 text-xs font-bold text-base">Most popular</span>}
+                {tier.popular && <span class="absolute -top-3 left-6 rounded-full bg-accent px-3 py-0.5 text-xs font-bold text-base">Best Value</span>}
                 <h3 class="font-display text-xl font-bold">{tier.name}</h3>
                 <p class="mt-2 font-display text-3xl text-accent">{tier.price}</p>
                 <p class="text-xs text-muted">{tier.period}</p>
