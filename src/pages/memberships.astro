@@ -7,13 +7,22 @@ import { pricingTiers, pricingDisclaimer, purchaseUrl } from '../data/pricing';
 
 <Layout title="Memberships & Pricing | Get Into Keeping & Football" description="Monthly membership plans for Get Into Keeping & Football across the North West.">
   <PageShell>
-    <section class="section-padding pt-32">
-      <div class="container-narrow">
-        <p class="eyebrow mb-3" data-reveal>Memberships</p>
-        <h1 class="mb-4 font-display text-4xl font-bold md:text-5xl" data-reveal>Pricing plans</h1>
-        <p class="mb-4 max-w-2xl text-lg text-muted" data-reveal>Choose the plan that fits your player's journey.</p>
-        <p class="mb-12 text-sm text-grey-muted" data-reveal>{pricingDisclaimer}</p>
+    <section class="relative overflow-hidden">
+      <img src="/photos/membership.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-base/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-base/40 via-base/70 to-base"></div>
+      <div class="relative z-10 section-padding pt-32">
+        <div class="container-narrow">
+          <p class="eyebrow mb-3" data-reveal>Memberships</p>
+          <h1 class="mb-4 font-display text-4xl font-bold md:text-5xl" data-reveal>Pricing plans</h1>
+          <p class="max-w-2xl text-lg text-text/85" data-reveal>Choose the plan that fits your player's journey.</p>
+        </div>
+      </div>
+    </section>
 
+    <section class="section-padding pt-0">
+      <div class="container-narrow">
+        <p class="mb-12 text-sm text-grey-muted" data-reveal>{pricingDisclaimer}</p>
         <div class="mx-auto grid max-w-3xl gap-8 sm:grid-cols-2">
           {
             pricingTiers.map((tier) => (

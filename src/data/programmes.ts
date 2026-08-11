@@ -174,6 +174,17 @@ export const programmes: Programme[] = [
   },
 ];
 
+// Session photo per programme — used behind the cards and as the page header backdrop.
+export const programmeImages: Record<string, string> = {
+  'tots-development': '/photos/tots.jpg',
+  'small-group-sessions': '/photos/small-group.jpg',
+  'early-years-development': '/photos/early-years.jpg',
+  'holiday-camps': '/photos/holiday-camps.jpg',
+  'one-to-one-sessions': '/photos/one-to-one.jpg',
+  'advanced-player': '/photos/advanced.jpg',
+  'safeguarding': '/photos/safeguarding.jpg',
+};
+
 export function getProgrammeBySlug(slug: string): Programme | undefined {
   return programmes.find((p) => p.slug === slug);
 }

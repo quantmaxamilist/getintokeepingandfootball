@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import PageShell from '../../components/PageShell.astro';
 import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { getProgrammeBySlug, programmes } from '../../data/programmes';
+import { getProgrammeBySlug, programmes, programmeImages } from '../../data/programmes';
 import { site } from '../../data/site';
 
 export function getStaticPaths() {
@@ -16,23 +16,42 @@ const programme = getProgrammeBySlug(slug!);
 if (!programme) {
   return Astro.redirect('/provision');
 }
+
+const bg = programmeImages[programme.slug];
 ---
 
 <Layout title={`${programme.title} | Get Into Keeping & Football`} description={programme.summary}>
   <PageShell>
-    <section class="section-padding pt-32">
-      <div class="container-narrow max-w-3xl">
-        <Icon name={programme.icon} class="mb-6 h-12 w-12 text-accent" />
-        <p class="eyebrow mb-3" data-reveal>Programme</p>
-        <h1 class="mb-6 font-display text-4xl font-bold md:text-5xl" data-reveal>{programme.title}</h1>
-        <p class="mb-6 text-lg text-muted" data-reveal>{programme.intro}</p>
-        {programme.paragraphs?.map((para) => (
-          <p class="mb-6 text-lg text-muted" data-reveal>{para}</p>
-        ))}
+    {/* header with dimmed session photo behind it */}
+    <section class="relative overflow-hidden">
+      {
+        bg && (
+          <>
+            <img src={bg} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-base/80" />
+            <div class="absolute inset-0 bg-gradient-to-b from-base/40 via-base/70 to-base" />
+          </>
+        )
+      }
+      <div class="relative z-10 section-padding pt-32">
+        <div class="container-narrow max-w-3xl">
+          <Icon name={programme.icon} class="mb-6 h-12 w-12 text-accent" />
+          <p class="eyebrow mb-3" data-reveal>Programme</p>
+          <h1 class="mb-6 font-display text-4xl font-bold md:text-5xl" data-reveal>{programme.title}</h1>
+          <p class="mb-6 text-lg text-text/85" data-reveal>{programme.intro}</p>
+          {programme.paragraphs?.map((para) => (
+            <p class="mb-6 text-lg text-text/85" data-reveal>{para}</p>
+          ))}
+        </div>
+      </div>
+    </section>
 
+    {/* details */}
+    <section class="section-padding pt-0">
+      <div class="container-narrow max-w-3xl">
         {
           programme.features ? (
-            <div class="mb-10 mt-6 grid gap-6 sm:grid-cols-2" data-reveal>
+            <div class="mb-10 grid gap-6 sm:grid-cols-2" data-reveal>
               {programme.features.map((f) => (
                 <div class="rounded-xl border border-white/10 bg-panel p-6">
                   <p class="eyebrow mb-2">{f.label}</p>
@@ -43,7 +62,7 @@ if (!programme) {
             </div>
           ) : (
             <Fragment>
-              <h2 class="mb-4 mt-2 font-display text-xl font-bold" data-reveal>What's included</h2>
+              <h2 class="mb-4 font-display text-xl font-bold" data-reveal>What's included</h2>
               <ul class="mb-10 space-y-2 text-muted" data-reveal>
                 {programme.included.map((item) => (
                   <li class="flex gap-3"><span class="text-accent">→</span>{item}</li>
