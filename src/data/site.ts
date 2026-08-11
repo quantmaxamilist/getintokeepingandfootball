@@ -4,10 +4,10 @@ export const site = {
   tagline: 'Get into keeping. Get into football.',
   description:
     'UEFA-qualified goalkeeper and football coaching across North West England — tots, groups, camps, 1:1 and academy pathways.',
-  phone: '', // TODO: client to supply
-  phoneHref: '',
-  email: '', // TODO: client to supply
-  emailHref: '',
+  phone: '07308 155200',
+  phoneHref: 'tel:+447308155200',
+  email: 'general@gikandfootball.co.uk',
+  emailHref: 'mailto:general@gikandfootball.co.uk',
   address: '', // TODO: client to supply
   url: 'https://getintokeepingfootball.co.uk',
   facebookUrl: 'https://www.facebook.com/GetIntoFootball/', // drives SocialFeed live posts embed

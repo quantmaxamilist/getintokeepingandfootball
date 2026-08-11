@@ -6,7 +6,7 @@ import CtaBand from '../components/CtaBand.astro';
 import { reviews, reviewStats } from '../data/reviews';
 ---
 
-<Layout title="Reviews | Get Into Keeping & Football" description="100+ five-star reviews from families across the North West — placeholder reviews until client supplies live data.">
+<Layout title="Reviews | Get Into Keeping & Football" description="100% of families recommend us — real Facebook reviews from parents across the North West.">
   <PageShell>
     <section class="section-padding pt-32">
       <div class="container-narrow">
@@ -15,13 +15,8 @@ import { reviews, reviewStats } from '../data/reviews';
           {reviewStats.total} {reviewStats.label}
         </h1>
         <p class="mb-8 max-w-2xl text-muted" data-reveal>
-          TODO: Replace placeholder reviews with real Google/Facebook reviews when supplied by client.
+          100% of families recommend us. Here's what parents across the North West say about our coaching.
         </p>
-
-        <div class="mb-8 flex flex-wrap gap-2" data-reveal>
-          <button type="button" class="rounded-full border border-accent bg-accent px-4 py-1.5 text-xs font-semibold text-base" data-filter="all">All</button>
-          <button type="button" class="rounded-full border border-white/20 px-4 py-1.5 text-xs font-semibold text-muted hover:border-accent hover:text-accent" data-filter="Placeholder">Placeholder</button>
-        </div>
 
         <div id="reviews-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r) => (
@@ -35,20 +30,3 @@ import { reviews, reviewStats } from '../data/reviews';
     <CtaBand />
   </PageShell>
 </Layout>
-
-<script>
-  document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('[data-filter]').forEach((b) => {
-        b.classList.toggle('border-accent', b === btn);
-        b.classList.toggle('bg-accent', b === btn);
-        b.classList.toggle('text-base', b === btn);
-      });
-      document.querySelectorAll<HTMLElement>('[data-review-source]').forEach((el) => {
-        const show = filter === 'all' || el.dataset.reviewSource === filter;
-        el.style.display = show ? '' : 'none';
-      });
-    });
-  });
-</script>
