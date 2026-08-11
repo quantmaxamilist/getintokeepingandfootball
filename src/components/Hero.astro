@@ -90,7 +90,17 @@ const { videoSrc = '', posterSrc = '' } = Astro.props;
       Get into keeping.<br /><span class="text-accent">Get into football.</span>
     </h1>
     <p class="mx-auto mb-10 max-w-2xl text-lg text-muted" data-reveal>
-      UEFA-qualified coaching across {venueLine} — tots, groups, camps, 1:1 and academy pathways.
+      <img src="/crests/uefa.png?v=1" alt="UEFA" class="eyebrow-badge" />
+      UEFA-qualified coaching across {venueLine}
+      <svg class="eng-flag" viewBox="0 0 30 18" role="img" aria-label="England"
+        ><rect width="30" height="18" fill="#fff" /><rect x="12" width="6" height="18" fill="#ce1124" /><rect
+          y="6"
+          width="30"
+          height="6"
+          fill="#ce1124"
+        /></svg
+      >
+      tots, groups, camps, 1:1 and academy pathways.
     </p>
     <div class="flex flex-col items-center justify-center gap-4 sm:flex-row" data-reveal>
       <a href="/contact" class="btn-primary">{site.ctaPrimary}</a>
@@ -176,6 +186,24 @@ const { videoSrc = '', posterSrc = '' } = Astro.props;
   .coachC:first-child { margin-left: 0; }
   .coachC svg { height: 36px; width: 36px; fill: #565c63; }
   .meet { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* UEFA badge + England flag inline in the sub-headline */
+  .eyebrow-badge {
+    display: inline-block;
+    height: 1.3em;
+    width: auto;
+    vertical-align: -0.3em;
+    margin-right: 0.35em;
+  }
+  .eng-flag {
+    display: inline-block;
+    height: 0.85em;
+    width: auto;
+    vertical-align: -0.02em;
+    margin: 0 0.18em;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
 
   /* keep the hero uncluttered on tablet & mobile */
   @media (max-width: 1023px) {

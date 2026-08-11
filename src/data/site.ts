@@ -128,7 +128,6 @@ export const affiliations = [
   { id: 'ramsbottom', name: 'Ramsbottom United JFC', initials: 'RU' },
   { id: 'rossendale', name: 'Rossendale FC', initials: 'RF' },
   { id: 'uefa', name: 'UEFA', initials: 'UE' },
-  { id: 'stars', name: '5 Stars', initials: '★★★★★' },
 ] as const;
 
 export const footerLinks = {

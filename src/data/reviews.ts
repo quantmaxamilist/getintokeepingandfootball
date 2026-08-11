@@ -170,8 +170,8 @@ export const reviews: Review[] = [
 ];
 
 export const reviewStats = {
-  total: '83',
-  label: 'Facebook recommendations',
+  total: '100%',
+  label: 'Positive Facebook Recommendations',
 } as const;
 
 export const homePreviewReviews = reviews.slice(0, 3);

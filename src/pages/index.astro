@@ -9,6 +9,7 @@ import ReviewCard from '../components/ReviewCard.astro';
 import SocialFeed from '../components/SocialFeed.astro';
 import KitShop from '../components/KitShop.astro';
 import CtaBand from '../components/CtaBand.astro';
+import TacticsDefs from '../components/TacticsDefs.astro';
 import { trustPillars } from '../data/site';
 import { programmes } from '../data/programmes';
 import { pricingTiers, pricingDisclaimer } from '../data/pricing';
@@ -98,14 +99,27 @@ import { entities } from '../data/site';
 
     <section class="section-padding">
       <div class="container-narrow">
-        <div class="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+        <TacticsDefs />
+        <div class="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <p class="eyebrow mb-3" data-reveal>Reviews</p>
             <h2 class="font-display text-3xl font-bold md:text-4xl" data-reveal>
               {reviewStats.total} {reviewStats.label}
             </h2>
           </div>
-          <a href="/reviews" class="text-sm font-semibold text-accent hover:underline" data-reveal>All reviews →</a>
+          <div class="flex flex-col items-start gap-3 sm:items-end" data-reveal>
+            <a
+              href="https://www.facebook.com/GetIntoFootball/reviews/?id=100075953196706&sk=reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="review-doodle"
+              aria-label="Leave us a review on Facebook"
+            >
+              <span class="review-hw">leave a review!</span>
+              <svg class="review-arrow hand" viewBox="0 0 140 104" aria-hidden="true"><use href="#tb-arrow" /></svg>
+            </a>
+            <a href="/reviews" class="text-sm font-semibold text-accent hover:underline">All reviews →</a>
+          </div>
         </div>
         <div class="grid gap-6 md:grid-cols-3">
           {homePreviewReviews.map((r) => <ReviewCard review={r} />)}
@@ -118,3 +132,43 @@ import { entities } from '../data/site';
     <CtaBand />
   </PageShell>
 </Layout>
+
+<style>
+  /* hand-drawn "leave a review!" annotation — same sketch style as the hero */
+  .review-doodle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #fff;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .review-hw {
+    font-family: 'Caveat', cursive;
+    font-size: 32px;
+    font-weight: 700;
+    transform: rotate(-4deg);
+    transition: color 0.2s ease;
+  }
+  .review-doodle:hover .review-hw {
+    color: var(--color-accent);
+  }
+  .review-arrow {
+    width: 58px;
+    height: 42px;
+    color: #fff;
+    transform: rotate(24deg);
+    transition: transform 0.2s ease;
+  }
+  .review-doodle:hover .review-arrow {
+    transform: rotate(24deg) translate(3px, 2px);
+  }
+  .review-doodle .hand {
+    filter: url(#rough);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .review-doodle .hand {
+      filter: none;
+    }
+  }
+</style>
