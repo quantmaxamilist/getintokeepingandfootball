@@ -10,7 +10,7 @@ export const site = {
   emailHref: '',
   address: '', // TODO: client to supply
   url: 'https://getintokeepingfootball.co.uk',
-  facebookUrl: '', // TODO: client to supply — drives SocialFeed embed
+  facebookUrl: 'https://www.facebook.com/GetIntoFootball/', // drives SocialFeed live posts embed
   instagramUrl: '', // TODO: client to supply
   areaServed: 'North West England',
   ctaPrimary: 'Book a session',

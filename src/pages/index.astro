@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import PageShell from '../components/PageShell.astro';
 import Hero from '../components/Hero.astro';
 import AffiliationsMarquee from '../components/AffiliationsMarquee.astro';
+import MeetTheTeam from '../components/MeetTheTeam.astro';
 import ProgrammeCard from '../components/ProgrammeCard.astro';
 import ReviewCard from '../components/ReviewCard.astro';
 import SocialFeed from '../components/SocialFeed.astro';
@@ -17,7 +18,7 @@ import { entities } from '../data/site';
 
 <Layout>
   <PageShell>
-    <Hero />
+    <Hero videoSrc="/landingpage.mp4?v=2" posterSrc="/landingpage-poster.jpg?v=2" />
     <AffiliationsMarquee />
 
     <section class="section-padding">
@@ -42,6 +43,8 @@ import { entities } from '../data/site';
         </div>
       </div>
     </section>
+
+    <MeetTheTeam />
 
     <section class="section-padding">
       <div class="container-narrow">

@@ -1,15 +1,18 @@
 ---
 import { site, venueLine } from '../data/site';
 import Logo from './Logo.astro';
+import TacticsDefs from './TacticsDefs.astro';
 
 interface Props {
   videoSrc?: string;
+  posterSrc?: string;
 }
 
-const { videoSrc = '' } = Astro.props;
+const { videoSrc = '', posterSrc = '' } = Astro.props;
 ---
 
 <section class="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-base">
+  <TacticsDefs />
   {
     videoSrc ? (
       <>
@@ -19,13 +22,17 @@ const { videoSrc = '' } = Astro.props;
           muted
           loop
           playsinline
+          preload="metadata"
+          poster={posterSrc || undefined}
           controlsList="nodownload"
           disablePictureInPicture
           class="absolute inset-0 h-full w-full object-cover"
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
+        {/* dim wash keeps the video subtle & the headline legible — tune 60–80 to taste */}
         <div class="absolute inset-0 bg-base/70"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-base/30 via-transparent to-base"></div>
       </>
     ) : (
       <>
@@ -36,6 +43,43 @@ const { videoSrc = '' } = Astro.props;
       </>
     )
   }
+
+  {/* hand-drawn tactics-board doodles */}
+  <svg class="doodle" viewBox="0 0 1200 660" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g class="hand" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+      <path d="M120 120 C220 90 240 210 340 175" stroke-dasharray="2 12" />
+      <path d="M980 100 C1080 140 1040 240 1130 260" stroke-dasharray="2 12" />
+      <circle cx="1040" cy="150" r="15" />
+      <path d="M70 330 l24 24 M94 330 l-24 24" />
+      <path d="M150 540 C280 500 320 610 460 570" stroke-dasharray="2 12" />
+      <circle cx="220" cy="250" r="13" />
+    </g>
+  </svg>
+
+  {/* LEFT — Our coaches */}
+  <a class="anno anno-left" href="#meet-the-team" aria-label="Meet the coaches">
+    <span class="hw hw-lg" style="transform:rotate(4deg)">Our coaches</span>
+    <span class="coaches">
+      <span class="coachC"><svg><use href="#tb-player" /></svg></span>
+      <span class="coachC"><svg><use href="#tb-player" /></svg></span>
+      <span class="coachC"><svg><use href="#tb-player" /></svg></span>
+    </span>
+    <span class="hw hw-sm meet" style="transform:rotate(-3deg)">
+      meet the coaches
+      <svg width="40" height="22" class="hand" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M4 11 L32 11" /><path d="M32 11 l-8 -6 M32 11 l-8 6" /></g></svg>
+    </span>
+  </a>
+
+  {/* RIGHT — Our team (Red Rose) */}
+  <a class="anno anno-right" href="#red-rose" aria-label="Red Rose FC — our team">
+    <span class="team-wrap">
+      <svg class="arrow-in hand" aria-hidden="true"><use href="#tb-arrow" /></svg>
+      <span class="rose">
+        <img src="/red-rose.png?v=8" alt="Red Rose FC" width="118" height="118" />
+      </span>
+    </span>
+    <span class="hw hw-lg" style="transform:rotate(-6deg)">Our team</span>
+  </a>
 
   <div class="relative z-10 mx-auto max-w-4xl px-5 py-32 text-center">
     <div class="mb-8 flex justify-center" data-reveal>
@@ -54,3 +98,90 @@ const { videoSrc = '' } = Astro.props;
     </div>
   </div>
 </section>
+
+<style>
+  .doodle {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    color: #fff;
+    opacity: 0.08;
+  }
+  .hand { filter: url(#rough); }
+  .hw { font-family: 'Caveat', cursive; color: #fff; line-height: 0.9; }
+  .hw-lg { font-size: 46px; font-weight: 700; }
+  .hw-sm { font-size: 23px; font-weight: 600; opacity: 0.92; }
+
+  .anno {
+    position: absolute;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .anno-left { left: 4%; top: 39%; }
+  .anno-right { right: 5%; top: 42%; }
+
+  .arrow { width: 140px; height: 104px; color: #fff; }
+  .team-wrap { position: relative; height: 118px; width: 118px; }
+  .arrow-in {
+    position: absolute;
+    color: #fff;
+    width: 150px;
+    height: 112px;
+    left: -108px;
+    top: -150px;
+    transform: rotate(16deg) scale(1.06);
+    pointer-events: none;
+  }
+  .rose {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 118px;
+    width: 118px;
+  }
+  .rose img {
+    height: 118px;
+    width: 118px;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    transform: scale(1.12);
+    transform-origin: center center;
+    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.55));
+  }
+
+  .coaches { display: flex; }
+  .coachC {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: #1a1d22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -14px;
+    overflow: hidden;
+  }
+  .coachC:first-child { margin-left: 0; }
+  .coachC svg { height: 36px; width: 36px; fill: #565c63; }
+  .meet { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* keep the hero uncluttered on tablet & mobile */
+  @media (max-width: 1023px) {
+    .anno { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hand { filter: none; }
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+/*
+  TacticsDefs.astro — shared hand-drawn SVG defs.
+  #rough  : roughen filter that gives clean SVG paths a sketched wobble.
+  #tb-player / #tb-arrow : reusable marks used by Hero + MeetTheTeam.
+  Safe to include more than once per page (identical ids resolve to the first).
+*/
+---
+<svg width="0" height="0" aria-hidden="true" style="position:absolute" class="tactics-defs">
+  <filter id="rough">
+    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="6" result="n" />
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" />
+  </filter>
+  <symbol id="tb-player" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="3.4" />
+    <path d="M5.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6z" />
+  </symbol>
+  <symbol id="tb-arrow" viewBox="0 0 140 104">
+    <g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 15 C66 -2 120 22 112 82" />
+      <path d="M112 82 l15 -19 M112 82 l-21 -7" />
+    </g>
+  </symbol>
+</svg>

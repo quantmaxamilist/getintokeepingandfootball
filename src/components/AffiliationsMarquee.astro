@@ -2,10 +2,10 @@
 import { affiliations } from '../data/site';
 
 const crestMap: Record<string, string> = {
-  hglfc: '/crests/hglfc.svg',
-  'junior-hoops': '/crests/junior-hoops.svg',
-  ramsbottom: '/crests/ramsbottom.svg',
-  rossendale: '/crests/rossendale.svg',
+  hglfc: '/crests/hglfc.png',
+  'junior-hoops': '/crests/junior-hoops.png',
+  ramsbottom: '/crests/ramsbottom.png',
+  rossendale: '/crests/rossendale.png',
 };
 ---
 
@@ -17,7 +17,7 @@ const crestMap: Record<string, string> = {
           <div class="flex shrink-0 items-center gap-3">
             {
               crestMap[item.id] ? (
-                <img src={crestMap[item.id]} alt="" class="h-12 w-12 rounded-full" width="48" height="48" />
+                <img src={crestMap[item.id]} alt={item.name} class="h-12 w-12 rounded-full bg-white object-contain p-1" width="48" height="48" />
               ) : (
                 <span class="flex h-12 min-w-[3rem] items-center justify-center rounded-full border border-white/20 bg-panel2 px-3 font-display text-sm text-accent">
                   {item.initials}

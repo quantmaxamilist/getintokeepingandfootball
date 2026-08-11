@@ -4,21 +4,86 @@ interface Props {
 }
 
 const { compact = false } = Astro.props;
+
+// Placeholder "kits" — blurred teaser cards until real product photos land.
+// When ready: replace the .kit-art block with <img src="/kits/home.jpg" class="kit-photo"/> and remove the blur.
+const SHIRT =
+  'M32 24 L44 16 Q50 22 56 16 L68 24 L90 36 L82 52 L70 45 L70 104 L30 104 L30 45 L18 52 L10 36 Z';
+
+const kits = [
+  { name: 'Home Kit', tone: 'Black', panelTop: '#2a2f37', panelBot: '#0d0f12', shirt: '#15181d', stroke: 'rgba(255,255,255,0.18)', spot: 'rgba(255,255,255,0.10)' },
+  { name: 'Away Kit', tone: 'White', panelTop: '#1b1e24', panelBot: '#0c0e11', shirt: '#e9edf0', stroke: 'rgba(255,255,255,0.12)', spot: 'rgba(255,255,255,0.06)' },
+];
 ---
 
-<section class:list={['section-padding', compact && 'py-12']}>
+<section class:list={['section-padding', compact && 'py-14']}>
   <div class="container-narrow">
     {
       !compact && (
-        <>
-          <p class="eyebrow mb-3" data-reveal>Kit Shop</p>
-          <h2 class="mb-6 font-display text-3xl font-bold md:text-4xl" data-reveal>Club kit &amp; merchandise</h2>
-        </>
+        <div class="mb-10" data-reveal>
+          <p class="eyebrow mb-3">Kit Shop</p>
+          <h2 class="font-display text-3xl font-bold md:text-4xl">Club kit &amp; merchandise</h2>
+          <p class="mt-3 max-w-2xl text-muted">The 2025/26 range is on its way — home and away kits dropping soon.</p>
+        </div>
       )
     }
-    <div class="rounded-xl border border-dashed border-white/20 bg-panel2 p-10 text-center" data-reveal>
-      <p class="font-display text-xl tracking-wide text-accent">Coming soon</p>
-      <p class="mt-2 text-sm text-muted">TODO: Real shop embed will replace this placeholder.</p>
+
+    <div class="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+      {
+        kits.map((k) => (
+          <figure class="group" data-reveal>
+            <div class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-panel">
+              {/* blurred kit artwork (swap for a real photo later) */}
+              <div
+                class="kit-art absolute inset-0"
+                style={`background: radial-gradient(60% 55% at 50% 42%, ${k.spot}, transparent 70%), linear-gradient(to bottom, ${k.panelTop}, ${k.panelBot});`}
+              >
+                <svg class="kit-shirt" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <path d={SHIRT} fill={k.shirt} stroke={k.stroke} stroke-width="1.6" />
+                  <path d="M50 22 v70" stroke="rgba(255,255,255,0.05)" stroke-width="9" />
+                </svg>
+              </div>
+
+              {/* vignette grounds the blur */}
+              <div class="absolute inset-0 bg-gradient-to-t from-base/[.66] via-transparent to-base/15"></div>
+
+              {/* coming soon bubble */}
+              <div class="absolute inset-0 grid place-items-center">
+                <span class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/40 px-5 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-md">
+                  <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+                  Coming soon
+                </span>
+              </div>
+            </div>
+
+            <figcaption class="mt-3 flex items-center justify-between px-1">
+              <span class="font-display text-sm font-semibold uppercase tracking-wide">{k.name}</span>
+              <span class="text-xs text-muted">{k.tone}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
     </div>
   </div>
 </section>
+
+<style>
+  .kit-art {
+    display: grid;
+    place-items: center;
+    filter: blur(11px) saturate(0.95); /* the teaser blur — remove when the real photo goes in */
+    transform: scale(1.06);            /* hides blur bleed at the edges */
+  }
+  .kit-shirt {
+    width: 66%;
+    height: 66%;
+    filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.55));
+  }
+  .kit-photo {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+</style>
