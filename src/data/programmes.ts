@@ -1,5 +1,11 @@
 import type { UtilityIcon } from './site';
 
+export interface ProgrammeFeature {
+  label: string;
+  title: string;
+  body: string;
+}
+
 export interface Programme {
   slug: string;
   title: string;
@@ -7,6 +13,8 @@ export interface Programme {
   summary: string;
   intro: string;
   included: string[];
+  paragraphs?: string[];
+  features?: ProgrammeFeature[];
 }
 
 export const programmes: Programme[] = [
@@ -87,11 +95,36 @@ export const programmes: Programme[] = [
   },
   {
     slug: 'advanced-player',
-    title: 'Advanced Player',
+    title: 'Advanced Player Programme',
     icon: 'star',
-    summary: 'Higher-intensity coaching for players ready to push technique, tactics and academy standards.',
+    summary: 'High-intensity coaching for players who strive for excellence and aspire to play at a high level.',
     intro:
-      'Advanced player sessions challenge technically and tactically — designed for players who are ready to train at a higher intensity and pursue academy pathways.',
+      'Our Advanced Development Programme is designed for children who strive for excellence. These high-intensity sessions provide maximum contact time, ensuring rapid skill enhancement and all-round development.',
+    paragraphs: [
+      'These sessions are aimed at footballers who aspire to play at a high level in the near future. Pairing high-level grassroots players with academy prospects, they allow for superb peer-to-peer challenge.',
+    ],
+    features: [
+      {
+        label: 'Concise',
+        title: 'Group Sizes',
+        body: 'With a maximum of 8 children per session, we provide high-level coaching with a strong focus on detail. Every player receives personalised attention — no one gets lost in a large group, allowing for more effective development.',
+      },
+      {
+        label: 'Maximum',
+        title: 'Ball Contact',
+        body: 'Maximum contact time means players get as many touches on the ball as possible, accelerating their development. Through high-intensity drills, small-sided games and minimal downtime, players stay engaged — improving technical skills, decision-making and confidence on the pitch.',
+      },
+      {
+        label: 'Topic',
+        title: 'Variation',
+        body: "A varied approach to development sharpens players' technical, tactical, physical and mental skills. Focusing on ball mastery, game intelligence, conditioning and resilience, players build a well-rounded skill set that improves both individual performance and overall team play.",
+      },
+      {
+        label: 'In-Depth',
+        title: 'Session Reviews',
+        body: "Session reviews are essential for tracking progress and identifying areas to improve. By evaluating each performance, coaches provide tailored feedback, highlight strengths and address weaknesses — keeping every session aligned with the player's development goals.",
+      },
+    ],
     included: [
       'Advanced technical work',
       'Tactical understanding and game IQ',

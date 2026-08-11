@@ -25,13 +25,33 @@ if (!programme) {
         <Icon name={programme.icon} class="mb-6 h-12 w-12 text-accent" />
         <p class="eyebrow mb-3" data-reveal>Programme</p>
         <h1 class="mb-6 font-display text-4xl font-bold md:text-5xl" data-reveal>{programme.title}</h1>
-        <p class="mb-8 text-lg text-muted" data-reveal>{programme.intro}</p>
-        <h2 class="mb-4 font-display text-xl font-bold" data-reveal>What's included</h2>
-        <ul class="mb-10 space-y-2 text-muted" data-reveal>
-          {programme.included.map((item) => (
-            <li class="flex gap-3"><span class="text-accent">→</span>{item}</li>
-          ))}
-        </ul>
+        <p class="mb-6 text-lg text-muted" data-reveal>{programme.intro}</p>
+        {programme.paragraphs?.map((para) => (
+          <p class="mb-6 text-lg text-muted" data-reveal>{para}</p>
+        ))}
+
+        {
+          programme.features ? (
+            <div class="mb-10 mt-6 grid gap-6 sm:grid-cols-2" data-reveal>
+              {programme.features.map((f) => (
+                <div class="rounded-xl border border-white/10 bg-panel p-6">
+                  <p class="eyebrow mb-2">{f.label}</p>
+                  <h2 class="mb-3 font-display text-lg font-bold">{f.title}</h2>
+                  <p class="text-sm leading-relaxed text-muted">{f.body}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <Fragment>
+              <h2 class="mb-4 mt-2 font-display text-xl font-bold" data-reveal>What's included</h2>
+              <ul class="mb-10 space-y-2 text-muted" data-reveal>
+                {programme.included.map((item) => (
+                  <li class="flex gap-3"><span class="text-accent">→</span>{item}</li>
+                ))}
+              </ul>
+            </Fragment>
+          )
+        }
         <a href="/contact" class="btn-primary" data-reveal>{site.ctaPrimary}</a>
       </div>
     </section>
